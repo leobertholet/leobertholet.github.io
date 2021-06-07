@@ -20,18 +20,19 @@ colorChoicesXML = ""
 
 words = ["hi",
          "iguana",
-        "schadenfreude",
+         "schadenfreude",
          "octet",
          "flex",
          "woke",
          ";)",
+         ":/",
          "umm",
          "welp",
          "okayy",
          "singularity"
         ];
 
-/* >= min, > max */
+/* >= min, < max. stolen from mozilla  */
 function getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
