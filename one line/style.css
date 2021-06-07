@@ -1,0 +1,88 @@
+body {
+    font-size: 0;
+}
+
+.color-choice, .text-option {
+    width: 16px;
+    height: 16px;
+    border: 7.5px solid white;
+    border-radius: 100%;
+    box-shadow: 0 0 0 1px rgb(68, 68, 68);
+    display: inline-block;
+    margin: 0 3.5px !important;
+    background: white;
+}
+
+.color-choice:hover, .text-option:hover {
+    cursor: pointer;
+    box-shadow: 0 0 1px 1px black;
+    opacity: 0.9;
+}
+
+.options-list {
+    margin: 10px 10px 0px 14px;
+    top: 0;
+    left: 0 !important;
+    right: 0;
+    bottom: 0 !important;
+    display: inline-block;
+    vertical-align: top;
+}
+
+#container {
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#text-options .text-option {
+    font-size: 17px;
+    color: black;
+    text-align: center;
+    font-family: "Roboto";
+    font-weight: 300;
+    color: rgb(77, 77, 77);
+}
+
+#text-options .text-option p {
+    margin: -2.5px 0 0 0;
+    user-select: none;
+
+}
+
+#font-input {
+    font-weight: normal;
+    font-size: 17px;
+    color: gray;
+    background: none;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: 10px;
+    outline: none;
+    border: none;
+    padding: 0 25px;
+    box-sizing: border-box;
+}
+
+#word {
+    top: 0;
+    left: 0;
+    background: none;
+    width: 100%;
+    text-align: center;
+    font-size: 92px;
+    font-weight: bold;
+    outline: none !important;
+    border: none !important;
+}
+
+#word, #font-input {
+    font-family: "Source Sans Pro";
+}
