@@ -5,37 +5,41 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+        <!-- Page title & icon -->
         <title>one line</title>
         <link rel="icon" type="image/ico" href="icon.ico">
 
+        <!-- Reference jQuery -->
         <script
             src="https://code.jquery.com/jquery-3.5.1.js"
             integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
             crossorigin="anonymous">
         </script>
 
+        <!-- Get Google fonts -->
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700&display=swap" rel="stylesheet">
 
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="style.css"> <!-- link CSS code -->
     </head>
 
     <body>
-        <div class="options-list" id="text-colors"></div>
-        <div class="options-list" id="background-colors"></div>
-        <div class="options-list" id="text-options">
-            <div class="text-option" id="increase-text-size"><p>+</p></div>
-            <div class="text-option" id="decrease-text-size"><p>−</p></div>
-            <div class="text-option" id="color-reverse"><p>~</p></div>
+        <div class="options-list" id="text-colors"></div> <!-- Holds text color options -->
+        <div class="options-list" id="background-colors"></div> <!-- Holds background color options -->
+        <div class="options-list" id="text-options"> <!-- Holds other options -->
+            <div class="text-option" id="increase-text-size"><p>+</p></div> <!-- Increase text size option-->
+            <div class="text-option" id="decrease-text-size"><p>−</p></div> <!-- Decrease text size option -->
+            <div class="text-option" id="color-reverse"><p>~</p></div> <!-- Switch text & background colors option -->
         </div>
 
-        <input id="font-input" value="Source Sans Pro">
+        <input id="font-input" value="Source Sans Pro"> <!-- For font selection; default font is set as value -->
 
+        <!-- contains text input where user types -->
         <div id="container">
             <input id="word" type="text">
         </div>
         
-        <script src="script.js"></script>
+        <script src="script.js"></script> <!-- link JavaScript -->
     </body>
 </html>
