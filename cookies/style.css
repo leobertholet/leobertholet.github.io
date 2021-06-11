@@ -3,6 +3,10 @@ body {
     justify-content: center;
 }
 
+#top h1 {
+    text-align: center;
+}
+
 .option {
     text-decoration: underline;
     color: blue;
@@ -17,7 +21,7 @@ body {
     background: moccasin;
     padding: 0 0;
     box-sizing: border-box;
-    top: 50px;
+    top: 150px;
 }
 
 .column {
@@ -39,14 +43,29 @@ body {
     margin: 10px 0 0 0;
 }
 
-.delete {
-    background: salmon;
+.delete, .move {
     width: 16px;
     height: 16px;
     border-radius: 100%;
+    display: inline-block;
+}
+
+.delete {
+    background: salmon;
+}
+
+.move {
+    background: cornflowerblue;
+}
+
+.delete:hover, .move:hover {
+    opacity: 0.8;
 }
 
 .delete:hover {
     cursor: pointer;
-    opacity: 0.8;
+}
+
+.move:hover {
+    cursor: move;
 }
