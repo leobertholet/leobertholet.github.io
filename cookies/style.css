@@ -1,0 +1,52 @@
+body {
+    display: flex;
+    justify-content: center;
+}
+
+.option {
+    text-decoration: underline;
+    color: blue;
+}
+
+.option:hover {
+    cursor: pointer;
+}
+
+#container {
+    position: absolute;
+    background: moccasin;
+    padding: 0 0;
+    box-sizing: border-box;
+    top: 50px;
+}
+
+.column {
+    vertical-align: top;
+    width: 280px;
+    background: rgba(0, 0, 0, 0.05);
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.tile {
+    background: white;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    padding: 13px;
+}
+
+.tile h3, p {
+    margin: 10px 0 0 0;
+}
+
+.delete {
+    background: salmon;
+    width: 16px;
+    height: 16px;
+    border-radius: 100%;
+}
+
+.delete:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
