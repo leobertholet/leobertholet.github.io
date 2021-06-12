@@ -225,12 +225,35 @@ $(document).on("mousedown touchstart", ".tile .move", function() {
     tile.css("box-sizing", "border-box");
     tileIndex = tile.attr("index");
     wasDragging = true;
+    
     int00 = setInterval(function() {
 
         $(document).on("mousemove touchmove", function(event) {
+
+            var mouseX, mouseY;
+            // code for osmeone on the intenet
+            /*if(event.type == 'touchstart' || event.type == 'touchmove' || event.type == 'touchend' || event.type == 'touchcancel'){
+                var touch = event.originalEvent.touches[0] || event.originalEvent.changedTouches[0];
+                mouseX = touch.pageX;
+                mouseY = touch.pageY;
+            } else if (event.type == 'mousedown' || event.type == 'mouseup' || event.type == 'mousemove' || event.type == 'mouseover'|| event.type=='mouseout' || event.type=='mouseenter' || event.type=='mouseleave') {
+                mouseX = event.clientX;
+                mouseY = event.clientY;
+            }*/
+
+            if (event.type == "touchmove") {
+                var touch = event.originalEvent.touches[0] || event.originalEvent.changedTouches[0];
+                mouseX = touch.pageX;
+                mouseY = touch.pageY - $(window).scrollTop();
+            }
+            else {
+                mouseX = event.pageX;
+                mouseY = event.pageY - $(window).scrollTop();
+            }
+
+         
             currCol = currElt = -1;
-            mouseX = event.pageX;
-            mouseY = event.pageY - $(window).scrollTop();
+            
 
             tile.css("position", "fixed");
             tile.css("left", (mouseX - 35).toString() + "px");
@@ -263,6 +286,7 @@ $(document).on("mousedown touchstart", ".tile .move", function() {
 
 $(document).on("mouseup touchend", function() {
     if (wasDragging) {
+        
         wasDragging = false;
         $(document).unbind("mousemove");
         $(document).unbind("touchmove");
