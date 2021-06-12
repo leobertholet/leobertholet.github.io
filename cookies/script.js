@@ -113,7 +113,11 @@ function pageSetup() {
         $("#container").append("<p>You don't have any cookies yet ... click add :)</p>");
     }
 
-    $("#footer").css("top", (($("#container").height() + 200).toString() + "px"));
+    $("#footer").css("display", "none");
+    footerTop = Math.max($("#container").height() + 200,
+                         $(document).height() - $("#footer").height());
+    $("#footer").css("top", footerTop.toString() + "px");
+    $("#footer").css("display", "initial");
     $(document).scrollTop(scrollPos);
 }
 
