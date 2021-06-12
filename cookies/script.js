@@ -19,8 +19,8 @@ function getMinCol() {
     minCol = 0;
     var i;
 
-    for (i = 1; i < colHeights.length; i++) {
-        if (colHeights[i] < colHeights[minCol]) {
+    for (i = 1; i < numCols; i++) {
+        if ($("#container").children().eq(i).height() < $("#container").children().eq(minCol).height()) {
             minCol = i;
         }
     }
@@ -67,6 +67,8 @@ function loadCookies() {
     }
 }
 
+var numCols;
+
 function pageSetup() {
     $("#container").empty();
     numCols = Math.max(1, Math.floor(0.85 * $(window).width() / (colWidth + 15)));
@@ -102,11 +104,11 @@ function pageSetup() {
         newTile = col.children().last();
         newTile.attr("index", i);
 
-        colHeights[colNum] += newTile.height() + 10;
+        colHeights[colNum] += newTile.height() + 15;
     }
 
     if (tilesInfo.length == 0) {
-        $("#container").append("<p>You don't have any tiles yet ... click add :)</p>");
+        $("#container").append("<p>You don't have any cookies yet ... click add :)</p>");
     }
 }
 
@@ -152,14 +154,16 @@ $(document).on("click", ".delete", function() {
 
 function darkMode() {
     $("#brightness-mode").text("Light mode");
-    $("body").css("background", "slategray");
+    $("body").css("background", "#222324");
     setCookie(-2, "dark");
+    $("#top h1").css("color", "white");
 }
 
 function lightMode() {
     $("#brightness-mode").text("Dark mode");
     $("body").css("background", "white");
     removeCookie(-2);
+    $("#top h1").css("color", "black");
 }
 
 $("#brightness-mode").click(function() {
@@ -206,3 +210,69 @@ $(document).on("click", ".tile p", function() {
     tilesInfo[$(this).parent().attr("index")][1] = $(this).text();
     storeCookies();
 });
+
+var wasDragging = false;
+
+var int00; // declared here to make it visible to clearInterval.
+
+currCol = currRow = -1;
+currIndex = -1;
+var tileIndex;
+
+$(document).on("mousedown", ".tile .move", function() {
+    tile = $(this).parent();
+    tile.css("width", "280px");
+    tile.css("box-sizing", "border-box");
+    tileIndex = tile.attr("index");
+    wasDragging = true;
+    int00 = setInterval(function() {
+
+        $(document).mousemove(function(event) {
+            currCol = currElt = -1;
+            mouseX = event.pageX;
+            mouseY = event.pageY - $(window).scrollTop();
+
+            tile.css("position", "fixed");
+            tile.css("left", (mouseX - 35).toString() + "px");
+            tile.css("top", (mouseY - 25).toString() + "px");
+            tile.css("margin-left", 0);
+
+            for (i = 0; i < numCols; i++) {
+                col = $("#container").children().eq(i);
+                for (j = 0; j < col.children().length; j++) {
+                    elt = col.children().eq(j);
+                    if (elt.attr("index") != tileIndex) {
+                        elt.css("background-color", "white");
+                        
+                        rect = elt[0].getBoundingClientRect();
+                        
+                        if (rect.left <= mouseX && mouseX <= rect.right && rect.bottom >= mouseY && mouseY >= rect.top) {
+                            elt.css("background-color", "red");
+                            currCol = i;
+                            currRow = j;
+                        }
+                    }
+                }
+            }
+            
+        });
+
+        
+    }, 200);
+});
+
+$(document).mouseup(function() {
+    if (wasDragging) {
+        wasDragging = false;
+        $(document).unbind("mousemove");
+        clearInterval(int00);
+        $(".tile").css("position", "static");
+        
+        if (currCol != -1) {
+            otherIndex = $("#container").children().eq(currCol).children().eq(currRow).attr("index");
+            console.log(tileIndex + "," + otherIndex);
+            swapTiles(tileIndex, otherIndex);
+        }
+    }
+});
+
