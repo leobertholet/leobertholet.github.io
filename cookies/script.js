@@ -225,13 +225,16 @@ $(document).on("mousedown touchstart", ".tile .move", function() {
     tile.css("box-sizing", "border-box");
     tileIndex = tile.attr("index");
     wasDragging = true;
+
+    $("*").css("user-select", "none");
     
     int00 = setInterval(function() {
+        var mouseX, mouseY;
 
         $(document).on("mousemove touchmove", function(event) {
 
-            var mouseX, mouseY;
-            // code for osmeone on the intenet
+            
+            // code from osmeone on the intenet on stackover
             /*if(event.type == 'touchstart' || event.type == 'touchmove' || event.type == 'touchend' || event.type == 'touchcancel'){
                 var touch = event.originalEvent.touches[0] || event.originalEvent.changedTouches[0];
                 mouseX = touch.pageX;
@@ -277,6 +280,13 @@ $(document).on("mousedown touchstart", ".tile .move", function() {
                     }
                 }
             }
+
+            if (mouseY < 100) {
+                $(document).scrollTop($(document).scrollTop() - 1)
+            }
+            else if (mouseY > $(window).height() - 100) {
+                $(document).scrollTop($(document).scrollTop() + 1)
+            }
             
         });
 
@@ -286,7 +296,8 @@ $(document).on("mousedown touchstart", ".tile .move", function() {
 
 $(document).on("mouseup touchend", function() {
     if (wasDragging) {
-        
+        scrollPos = $(document).scrollTop();
+
         wasDragging = false;
         $(document).unbind("mousemove");
         $(document).unbind("touchmove");
@@ -297,9 +308,11 @@ $(document).on("mouseup touchend", function() {
             
             otherIndex = $("#container").children().eq(currCol).children().eq(currRow).attr("index");
             swapTiles(tileIndex, otherIndex);
+            $(document).scrollTop(scrollPos);
         }
 
         currCol = CurrRow = -1;
+        $("*").css("user-select", "auto");
     }
 });
 
