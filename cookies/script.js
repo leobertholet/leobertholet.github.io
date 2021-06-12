@@ -219,7 +219,7 @@ currCol = currRow = -1;
 currIndex = -1;
 var tileIndex;
 
-$(document).on("mousedown", ".tile .move", function() {
+$(document).on("mousedown touchstart", ".tile .move", function() {
     tile = $(this).parent();
     tile.css("width", "280px");
     tile.css("box-sizing", "border-box");
@@ -227,7 +227,7 @@ $(document).on("mousedown", ".tile .move", function() {
     wasDragging = true;
     int00 = setInterval(function() {
 
-        $(document).mousemove(function(event) {
+        $(document).on("mousemove touchmove", function(event) {
             currCol = currElt = -1;
             mouseX = event.pageX;
             mouseY = event.pageY - $(window).scrollTop();
@@ -261,18 +261,21 @@ $(document).on("mousedown", ".tile .move", function() {
     }, 200);
 });
 
-$(document).mouseup(function() {
+$(document).on("mouseup touchend", function() {
     if (wasDragging) {
         wasDragging = false;
         $(document).unbind("mousemove");
+        $(document).unbind("touchmove");
         clearInterval(int00);
         $(".tile").css("position", "static");
         
         if (currCol != -1) {
+            
             otherIndex = $("#container").children().eq(currCol).children().eq(currRow).attr("index");
-            console.log(tileIndex + "," + otherIndex);
             swapTiles(tileIndex, otherIndex);
         }
+
+        currCol = CurrRow = -1;
     }
 });
 
