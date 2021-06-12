@@ -246,7 +246,7 @@ $(document).on("mousedown touchstart", ".tile", function(e) {
 
     initRect = tile[0].getBoundingClientRect();
 
-    if (e.type == "touchmove") {
+    if (e.type == "touchstart") {
         var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
         mouseX = touch.pageX;
         mouseY = touch.pageY - $(window).scrollTop();

@@ -51,6 +51,7 @@
     margin-bottom: 15px;
     border-radius: 4px;
     padding: 13px;
+    touch-action: none;
 }
 
 .tile:hover {
@@ -71,7 +72,6 @@
     height: 16px;
     border-radius: 100%;
     display: inline-block;
-    touch-action: none;
     opacity: 0;
     transition: opacity 300ms;
     background: salmon;
