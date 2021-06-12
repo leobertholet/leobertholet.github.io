@@ -40,6 +40,8 @@ function removeCookie(index) {
     localStorage.removeItem(index.toString());
 }
 
+var tilesInfo;
+
 function storeCookies() {
     localStorage.clear();
     setCookie(-1,tilesInfo.length.toString());
@@ -70,6 +72,7 @@ function loadCookies() {
 var numCols;
 
 function pageSetup() {
+    scrollPos = $(document).scrollTop();
     $("#container").empty();
     numCols = Math.max(1, Math.floor(0.85 * $(window).width() / (colWidth + 15)));
     colsWidth = Math.floor(numCols * colWidth + 15 * (numCols - 1));
@@ -88,7 +91,6 @@ function pageSetup() {
         tileInfo = tilesInfo[i];
         newTile = "<div class='tile'>"
                     + "<div class='delete'></div>"
-                    + "<div class ='move'></div>"
                     + "<h3>" + tileInfo[0] + "</h3>"
                     + "<p>" + tileInfo[1] + "</p>"
                 + "</div>";
@@ -110,10 +112,16 @@ function pageSetup() {
     if (tilesInfo.length == 0) {
         $("#container").append("<p>You don't have any cookies yet ... click add :)</p>");
     }
+
+    $("#footer").css("top", (($("#container").height() + 200).toString() + "px"));
+    $(document).scrollTop(scrollPos);
 }
 
 $(window).resize(function() {
-    pageSetup();
+    // check doesnt run just b4 doc first loading
+    if (tilesInfo != null) {
+        pageSetup();
+    }
 });
 
 $(document).ready(function() {
@@ -197,6 +205,8 @@ $("#delete-all").click(function() {
     }
 });
 
+// OLD STUFF FOR CHANGING TEXT, TITLES
+/*
 $(document).on("click", ".tile h3", function() {
     newText = prompt("change text", $(this).text());
     $(this).text(newText);
@@ -210,6 +220,7 @@ $(document).on("click", ".tile p", function() {
     tilesInfo[$(this).parent().attr("index")][1] = $(this).text();
     storeCookies();
 });
+*/
 
 var wasDragging = false;
 
@@ -219,19 +230,48 @@ currCol = currRow = -1;
 currIndex = -1;
 var tileIndex;
 
-$(document).on("mousedown touchstart", ".tile .move", function() {
-    tile = $(this).parent();
+$(document).on("mousedown touchstart", ".tile", function(e) {
+    
+    tile = $(this);
     tile.css("width", "280px");
     tile.css("box-sizing", "border-box");
+    tile.css("opacity", "0.85");
     tileIndex = tile.attr("index");
+
+    
+
     wasDragging = true;
+    var mouseX, mouseY;
+    var deltaX, deltaY;
+
+    initRect = tile[0].getBoundingClientRect();
+
+    if (e.type == "touchmove") {
+        var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
+        mouseX = touch.pageX;
+        mouseY = touch.pageY - $(window).scrollTop();
+    }
+    else {
+        mouseX = e.pageX;
+        mouseY = e.pageY - $(window).scrollTop();
+    }
+
+    // displacement between box corner and where mouse grabs
+    deltaX = Math.floor(mouseX - initRect.left);
+    deltaY = Math.floor(mouseY - initRect.top);
+    
 
     $("*").css("user-select", "none");
+
+    hiddenDeletes = false;
     
     int00 = setInterval(function() {
-        var mouseX, mouseY;
+        
 
         $(document).on("mousemove touchmove", function(event) {
+            if (!hiddenDeletes) {
+                $(".delete").css("visibility", "hidden");
+            }
 
             
             // code from osmeone on the intenet on stackover
@@ -259,8 +299,8 @@ $(document).on("mousedown touchstart", ".tile .move", function() {
             
 
             tile.css("position", "fixed");
-            tile.css("left", (mouseX - 35).toString() + "px");
-            tile.css("top", (mouseY - 25).toString() + "px");
+            tile.css("left", (mouseX - deltaX).toString() + "px");
+            tile.css("top", (mouseY - deltaY).toString() + "px");
             tile.css("margin-left", 0);
 
             for (i = 0; i < numCols; i++) {
@@ -296,19 +336,19 @@ $(document).on("mousedown touchstart", ".tile .move", function() {
 
 $(document).on("mouseup touchend", function() {
     if (wasDragging) {
-        scrollPos = $(document).scrollTop();
 
         wasDragging = false;
+        $(".delete").css("visibility", "visible");
         $(document).unbind("mousemove");
         $(document).unbind("touchmove");
         clearInterval(int00);
         $(".tile").css("position", "static");
+        $(".tile").css("opacity", "1");
         
         if (currCol != -1) {
             
             otherIndex = $("#container").children().eq(currCol).children().eq(currRow).attr("index");
             swapTiles(tileIndex, otherIndex);
-            $(document).scrollTop(scrollPos);
         }
 
         currCol = CurrRow = -1;
