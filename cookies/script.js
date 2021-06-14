@@ -233,13 +233,20 @@ var int00; // declared here to make it visible to clearInterval.
 currCol = currRow = -1;
 currIndex = -1;
 var tileIndex;
+var tile;
 
 $(document).on("mousedown touchstart", ".tile", function(e) {
     
-    tile = $(this);
+    oldTile = $(this);
+    
+    oldTile.clone().insertAfter($("#container"));
+
+    
+    tile = $("#container").next();
     tile.css("width", "280px");
     tile.css("box-sizing", "border-box");
     tile.css("opacity", "0.85");
+    tile.css("display", "none");
     tileIndex = tile.attr("index");
 
     
@@ -248,7 +255,7 @@ $(document).on("mousedown touchstart", ".tile", function(e) {
     var mouseX, mouseY;
     var deltaX, deltaY;
 
-    initRect = tile[0].getBoundingClientRect();
+    initRect = oldTile[0].getBoundingClientRect();
 
     if (e.type == "touchstart") {
         var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
@@ -268,6 +275,7 @@ $(document).on("mousedown touchstart", ".tile", function(e) {
     $("*").css("user-select", "none");
 
     hiddenDeletes = false;
+    madeClone = false;
     
     int00 = setInterval(function() {
         
@@ -275,6 +283,13 @@ $(document).on("mousedown touchstart", ".tile", function(e) {
         $(document).on("mousemove touchmove", function(event) {
             if (!hiddenDeletes) {
                 $(".delete").css("visibility", "hidden");
+                hiddenDeletes = true;
+            }
+
+            if (!madeClone) {
+                oldTile.css("visibility", "hidden");
+                tile.css("display", "initial");
+                madeClone = true;
             }
 
             
@@ -348,6 +363,8 @@ $(document).on("mouseup touchend", function() {
         clearInterval(int00);
         $(".tile").css("position", "static");
         $(".tile").css("opacity", "1");
+        $(".tile").css("visibility", "visible");
+        tile.remove();
         
         if (currCol != -1) {
             
