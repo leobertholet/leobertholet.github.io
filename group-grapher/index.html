@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Page title & icon -->
+        <title>Group Grapher</title>
+        <link rel="icon" type="image/ico" href="files/rounded-icon.ico">
+
+        <!-- Reference jQuery -->
+        <script
+            src="https://code.jquery.com/jquery-3.5.1.js"
+            integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+            crossorigin="anonymous">
+        </script>
+
+        <!-- Load MathJax -->
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+        <!-- Get Google fonts -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&family=Lato:wght@700&display=swap" rel="stylesheet">
+
+        <link rel="stylesheet" href="style.css"> <!-- Link CSS code -->
+    </head>
+
+    <body>
+        <!-- The fixed menu at the bottom of the page -->
+        <div id="top">
+            <img src="files/down-arrow.png" id="down-arrow"> <!-- Arrow icon -->
+
+            <!-- Holds title and input -->
+            <span id="input-main">
+                <h1 id="logo">GROUP GRAPHER</h1> <!-- Website title -->
+
+                <!-- The input and buttons below it -->
+                <div id="input-holder">
+                    <!-- Input -->
+                    <input id="expression-input" spellcheck="false" placeholder="x^2 + y^2 in Z/2 x Z/4 x U(5) . . .">
+                    <!-- Submit button -->
+                    <div id="submit">
+                        <button id="submit-ring" title="Compute as ring">Graph</button>
+                    </div>
+
+                    <!-- Buttons below the search bar -->
+                    <div id="second-line">
+                        <!-- Color scheme buttons -->
+                        <img src="files/rainbow.png" id="rainbow-scheme" title="Rainbow">
+                        <img src="files/blue.png" id="blue-scheme" title="Blue">
+                        <img src="files/green.png" id="green-scheme" title="Green">
+                        <img src="files/grayscale.png" id="grayscale-scheme" title="Grayscale">
+
+                        <!-- Other links -->
+                        <p id="submit-group" title="Compute as group">Compute as group</p>
+                        <p id="info-button">What can I graph?</p>
+                        <p id="settings-button">Settings</p>
+                    </div>
+                </div>
+
+                <!-- Additional content that appears below input-main -->
+                <div id="extra">
+                    <!-- Settings box -->
+                    <span id="settings">
+                        <!-- Settings for graph boxes -->
+                        <div class="line">
+                            <p class="bold">Boxes</p>
+
+                            <div class="spacer"></div>
+                            <p>width = </p>
+                            <input type="text" id="box-width">
+                            <p>,</p>
+
+                            <div class="spacer"></div>
+                            <p>height = </p>
+                            <input type="text" id="box-height">
+                            <p>,</p>
+
+                            <div class="spacer"></div>
+                            <select id="inputs-toggle">
+                                <option>Show inputs</option>
+                                <option>Hide inputs</option>
+                            </select>
+                        </div>
+
+                        <!-- Settings for box spacing -->
+                        <div class="line">
+                            <p class="bold">Spacing</p>
+
+                            <div class="spacer"></div>
+                            <p>x = </p>
+                            <input type="text" id="x-spacing">
+                            <p>,</p>
+
+                            <div class="spacer"></div>
+                            <p>y = </p>
+                            <input type="text" id="y-spacing">
+                            <p>,</p>
+
+                            <div class="spacer"></div>
+                            <p>extra = </p>
+                            <input type="text" id="extra-spacing">
+                        </div>
+
+                        <!-- Settings for graph colors -->
+                        <div class="line">
+                            <p class="bold">Colors</p>
+
+                            <div class="spacer"></div>
+                            <p>hue = </p>
+                            <input type="text" id="h-lower">
+                            <p> to </p>
+                            <input type="text" id="h-upper">
+                            <p>,</p>
+
+                            <div class="spacer"></div>
+                            <p>saturation = </p>
+                            <input type="text" id="s-lower">
+                            <p> to </p>
+                            <input type="text" id="s-upper">
+                            <p>,</p>
+
+                            <div class="spacer"></div>
+                            <p>lightness = </p>
+                            <input type="text" id="l-lower">
+                            <p> to </p>
+                            <input type="text" id="l-upper">
+                            <p>,</p>
+
+                            <div class="spacer"></div>
+                            <select id="mix-products">
+                                <option>Separate products</option>
+                                <option>Mix products</option>
+                            </select>
+                        </div>
+                    </span>
+
+                    <!-- Information box -->
+                    <span id="info">
+                        <!-- Information about available groups -->
+                        <div class="line">
+                            <p class="bold">Groups</p>
+                            <div class="spacer"></div>
+                            <p>Enter "[expression] in [group]" to graph an expression in one of the following groups.</p>
+                            
+                            <br><p>\(\mathbb{Z}_n\) ("Zn"), the ring of integers mod \(n\).</p>
+                            <div class="spacer"></div>
+                            <p>\(U(n)\) ("Un"), the corresponding group of units.</p>
+                            <div class="spacer"></div>
+                            <p>For example, "(x - 32)^2 + (y - 32)^2 in Z128".</p>
+
+                            <br><p>\(\mathcal{B}\) ("B"), the Boolean algebra with "0" as false, "1" as true.</p>
+                            <div class="spacer"></div>
+                            <p>Booleans can be combined with "+" and "*" for OR and AND, respectively, and with "'" or "-" for NOT.</p>
+                            
+                            <br><p>\(D_n\) ("Dn"), the group of symmetries of a regular \(n\)-gon in the plane.</p>
+                            <div class="spacer"></div>
+                            <p>Here a nonnegative number "m" represents a counterclockwise rotation by m, while a negative number "-m" represents "(m - 1)H", a horizontal flip followed by a counterclockwise rotation by m - 1.</p>
+                            
+                            <br><p>\(\mathbb{F}_p[t]/(q), q(t) = c_0 + c_1 t + \cdots + c_nt^n\) ("Fp[c0, c1, ..., cn]"), the finite field of prime-power order \(p^n\) where \(q\) is irreducible over \(\mathbb{Z}_p\).</p>
+                            <div class="spacer"></div>
+                            <p>Polynomials can be entered as bracketed vectors, e.g., "xy + [1,1] in F3[1,0,1]" graphs \(xy + i + 1\) mod 3.</p>
+                        </div>
+
+                        <!-- Information about external direct products -->
+                        <div class="line">
+                            <p class="bold">External direct products</p>
+                            <div class="spacer"></div>
+                            <p>To graph a Cartesian product, separate group names with "x", e.g., "xy in Z2 x Z4 x U5".</p>
+                        </div>
+
+                        <!-- Information about available operations -->
+                        <div class="line">
+                            <p class="bold">Operations</p>
+                            <div class="spacer"></div>
+                            <p>"+", "-", "*", "/" denote the usual operations, based on the algebraic setting.</p>
+                            <div class="spacer"></div>
+                            <p>Use "^" for exponents.</p>
+                            <div class="spacer"></div>
+                            <p>Use "'" for the inverse of a group operation, e.g., "xy' in U5" graphs \(xy^{-1}\) in \(U(5)\).</p>
+                        </div>
+
+                        <!-- Information about equality checks -->
+                        <div class="line">
+                            <p class="bold">Equality checks</p>
+                            <div class="spacer"></div>
+                            <p>Using "=" to check for equality returns a Boolean.</p>
+                            <div class="spacer"></div>
+                            <p>Boolean clauses can be combined with the Boolean operations explained above.</p>
+                            <div class="spacer"></div>
+                            <p>For example, "y^2 = x^3 + x in Z23" graphs the solutions of \(y^2=x^3+x\) in the field \(\mathbb{Z}_{23}\).</p>
+                        </div>
+
+                        <!-- Information about saving graph image -->
+                        <div class="line">
+                            <p class="bold">Saving</p>
+                            <div class="spacer"></div>
+                            <p>Right click a graph to save it as an image.</p>
+                        </div>
+                    </span>
+                </div>
+            </span>
+
+            <!-- Bar to display graph name when menu minimized: "[expression] in [group]" -->
+            <p id="display" title="Click to edit">
+                <span id="expression-display"></span> <!-- Expression -->
+                &nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;&nbsp;&nbsp;&nbsp; <!-- "in" -->
+                <span id="group-display"></span> <!-- Group -->
+            </p>
+        </div>
+
+        <!-- The canvas where the graph is displayed -->
+        <div id="canvas-container"> <!-- Holds the canvas, for spacing -->
+            <canvas id="canvas" width="100px" height="100px"></canvas> <!-- The graph canvas -->
+        </div>
+
+        <!-- Label that appears when graph hovered over -->
+        <div id="label">
+            <!-- Displays as "key: value" -->
+            <span id="label-key">Key: </span>
+            <span id="label-value">value</span>
+        </div>
+
+        <!-- Get JS scripts -->
+        <script src="scripts/libraries/math.js"></script> <!-- math.js library -->
+        <script src="scripts/math-parser.js"></script> <!-- Math expression parser -->
+        <script src="scripts/groups/groups-helper.js"></script> <!-- Helper methods for groups -->
+        <!-- Scripts for each group -->
+        <script src="scripts/groups/groups-R.js"></script> <!-- Reals -->
+        <script src="scripts/groups/groups-B.js"></script> <!-- Boolean algebra -->
+        <script src="scripts/groups/groups-Zn.js"></script> <!-- Z/n -->
+        <script src="scripts/groups/groups-Un.js"></script> <!-- U(n) -->
+        <script src="scripts/groups/groups-Fpn.js"></script> <!-- Fp^n -->
+        <script src="scripts/groups/groups-Dn.js"></script> <!-- Dn -->
+        <script src="scripts/groups/groups.js"></script> <!-- Groups scripts -->
+        <script src="scripts/script.js"></script> <!-- Main script -->
+    </body>
+</html>

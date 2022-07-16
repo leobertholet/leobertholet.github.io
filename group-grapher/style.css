@@ -1,0 +1,261 @@
+body {
+    /* Creates grid background */
+    background-color: white;
+    background-image:  linear-gradient(#f1f1f1 0.6px, transparent 0.6px),
+        linear-gradient(to right, #f1f1f1 0.6px, #ffffff 0.6px);
+    background-size: 12px 12px;
+    opacity: 1;
+    margin: 0;
+    text-align: center; /* Centers graph */
+}
+
+#canvas-container {
+    display: inline-block;
+    padding: 10px;
+    padding-top: 15px;
+    padding-bottom: 85px; /* So you can see grid when down arrow clicked */
+    margin: 0;
+    font-size: 0; /* Removes extra space that appears */
+}
+
+#canvas {
+    width: 1000px;
+    height: 1000px;
+}
+
+#label {
+    display: none;
+    position: fixed;
+    top: 0;
+    font-family: "Source Sans Pro";
+    font-size: 11.5px;
+    background: white;
+    border: 0.5px solid black;
+    padding: 2px 5px;
+    box-shadow: 0 0 2px 0.5px rgba(66, 66, 66, 0.4);
+    border-radius: 2px;
+    opacity: 0.9;
+}
+
+#label #label-key {
+    font-weight: 700;
+}
+
+#label #label-value {
+    font-weight: 400;
+}
+
+#top {
+    width: 100%;
+    padding: 18px 0;
+    margin-left: 0 !important;
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    background: white;
+    z-index: 10;
+    box-shadow: 0 0 0px 2px rgba(111, 111, 111, 0.45);
+}
+
+#logo {
+    font-family: "Lato";
+    font-size: 18px;
+    user-select: none;
+    text-align: center;
+    letter-spacing: 3.5px;
+    margin: 0 10px 15px 10px;
+    line-height: 1;
+    font-weight: 700;
+    color: black;
+}
+
+#down-arrow {
+    position: fixed;
+    height: 13px;
+    opacity: 0.15;
+    right: 30px;
+    margin-top: 2px;
+    transition: transform 0.3s;
+}
+
+.down-arrow-flip {
+    transform: rotate(-180deg);
+}
+
+#down-arrow:hover {
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+#input-holder p {
+    margin: 0;
+    font-size: 13px;
+    font-family: "Source Sans Pro";
+    font-weight: 400;
+    text-decoration: underline;
+    color: black;
+}
+
+#input-holder p:hover {
+    cursor: pointer;
+}
+
+#submit {
+    width: 100%;
+    background: none;
+    pointer-events: none;
+    margin-top: -24.5px;
+    text-align: right;
+    padding-right: 10px;
+    box-sizing: border-box;
+    font-size: 0;
+}
+
+#submit-ring {
+    font-family: "Source Sans Pro";
+    font-weight: 600;
+    font-size: 11px;
+    color: white;
+    border: none;
+    padding: 3px 6.5px;
+    border-radius: 2px;
+    right: 0;
+    pointer-events: all;
+}
+
+#submit-ring {
+    background: black;
+}
+
+#submit-ring:hover {
+    opacity: 0.8;
+}
+
+#second-line {
+    padding: 0 7px;
+    margin-top: 13px;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+#second-line > * {
+    vertical-align: middle;
+    display: inline-block;
+}
+
+#second-line img {
+    height: 20px;
+    border-radius: 3px;
+    box-shadow: 0 0 2px 0.5px rgb(194, 194, 194);
+    box-sizing: border-box;
+    margin-right: 4px;
+}
+
+#second-line img:hover {
+    box-shadow: 0 0 2px 0.5px rgb(62, 62, 62);
+    cursor: pointer;
+    filter: brightness(0.9);
+}
+
+#second-line p {
+    margin-left: 18px;
+}
+
+#second-line p:first-of-type {
+    margin-left: 25px;
+}
+
+#top button:hover {
+    cursor: pointer;
+}
+
+#top #display {
+    margin: 0;
+    font-family: "Source Sans Pro";
+    font-weight: 400;
+    font-size: 17px;
+    text-align: center;
+    display: none;
+    text-decoration: none;
+}
+
+#display:hover {
+    cursor: text;
+}
+
+#input-holder {
+    display: block;
+    margin: 0 auto;
+    width: 450px;
+}
+
+#expression-input {
+    display: block;
+    width: 100%;
+    height: 30px;
+    border-radius: 4px;
+    border: 1px solid gray;
+    box-shadow: 0 0 0px 2px lightgray;
+    padding: 3px 58px 3px 9px;
+    font-family: "Source Sans Pro";
+    font-size: 15px;
+    font-weight: 400;
+    box-sizing: border-box;
+}
+
+#expression-input:focus {
+    outline: none;
+}
+
+#info {
+    display: none;
+}
+
+#extra {
+    text-align: left;
+    display: none;
+    background: rgb(239, 239, 239);
+    margin-top: 18px;
+    margin-bottom: -18px;
+    padding: 18px;
+    font-family: "Source Sans Pro";
+    font-size: 14px;
+    max-height: 180px;
+    overflow-y: scroll;
+}
+
+#extra p, input, select, .spacer {
+    display: inline-block;
+    margin: 0;
+}
+
+#extra input, select {
+    border: none;
+    outline: none;
+    border-radius: 2px;
+    padding: 2px 3px;
+    font-family: "Source Sans Pro";
+    font-size: 13px;
+}
+
+.bold {
+    font-weight: 700;
+}
+
+.line {
+    margin: 6px 0 0 0;
+    line-height: 1.8;
+}
+
+#extra .line:first-of-type {
+    margin-top: 0;
+}
+
+#extra input {
+    width: 25px;
+}
+
+.spacer {
+    width: 10px;
+}
