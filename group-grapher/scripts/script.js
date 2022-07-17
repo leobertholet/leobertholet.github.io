@@ -401,8 +401,6 @@ function updatePage(mode) {
                 let canvasEffectiveHeight = Math.ceil(canvas.height / scale);
                 let verticalSpace = Math.max(15, Math.floor((getScreenHeight()
                     - 60 - canvasEffectiveHeight) / 2));
-                console.log(canvasEffectiveHeight)
-                console.log(verticalSpace)
 
                 // Adjust padding to create desired vertical spacing
                 $("#canvas-container").css("padding-top", Math.max(15,
@@ -773,7 +771,7 @@ $(document).ready(function() {
     // Zoom out to show everything on mobile
     const viewport = document.querySelector('meta[name="viewport"]');
     alert(viewport)
-    $(window).width()
+    alert($(window).width())
     if (viewport && $(window).width() < 480) {
         viewport.content = 'initial-scale=1';
         viewport.content = 'width=480';
