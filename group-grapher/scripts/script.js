@@ -770,10 +770,8 @@ $(document).ready(function() {
 
     // Zoom out to show everything on mobile
     const viewport = document.querySelector('meta[name="viewport"]');
-    alert(viewport)
-    alert($(window).width())
+    alert(viewport && $(window).width() < 480)
     if (viewport && $(window).width() < 480) {
-        viewport.content = 'initial-scale=1';
         viewport.content = 'width=480';
     }
 
