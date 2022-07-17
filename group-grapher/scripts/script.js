@@ -770,12 +770,13 @@ $(document).ready(function() {
         $("#extra").css("max-height", getScreenHeight() / 2);
     }
 
-    // Zoom out to show 
-    alert("Ready")
+    // Zoom out to show everything on mobile
     const viewport = document.querySelector('meta[name="viewport"]');
-    if (viewport) {
+    alert(viewport)
+    $(window).width()
+    if (viewport && $(window).width() < 480) {
         viewport.content = 'initial-scale=1';
-        viewport.content = 'width=device-width';
+        viewport.content = 'width=480';
     }
 
     // Detect click to graph group
