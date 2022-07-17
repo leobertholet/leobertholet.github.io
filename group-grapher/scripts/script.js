@@ -367,6 +367,8 @@ function getUserInputStrings() {
 
 // Updates page to show a new graphs
 function updatePage(mode) {
+    // Hides Android keybaord, so proper height will be computed later
+    $("input").blur();
     let userInputStrings = getUserInputStrings(); // Get user's input
 
     if (userInputStrings != null) {
@@ -746,6 +748,7 @@ $(document).ready(function() {
     setup(); // Set up page
 
     // If screen too short, change height of info box
+    $("input").blur(); // Hide Android keyboard before measuring height
     if (window.innerHeight < 350) {
         $("#extra").css("max-height", window.innerHeight / 2);
     }
