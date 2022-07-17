@@ -762,8 +762,11 @@ $(document).ready(function() {
     androidHeight = $(window).height()
     let ua = navigator.userAgent.toLowerCase();
     isAndroid = ua.indexOf("android") > -1; // Check if Android
-    
+
     setup(); // Set up page
+
+    alert(isAndroid)
+    alert(androidHeight)
 
     // If screen too short, change height of info box
     if (window.innerHeight < 350) {
