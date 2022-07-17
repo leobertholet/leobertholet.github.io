@@ -765,9 +765,6 @@ $(document).ready(function() {
 
     setup(); // Set up page
 
-    alert(isAndroid)
-    alert(androidHeight)
-
     // If screen too short, change height of info box
     if (window.innerHeight < 350) {
         $("#extra").css("max-height", getScreenHeight() / 2);
