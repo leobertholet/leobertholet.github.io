@@ -401,8 +401,10 @@ function updatePage(mode) {
 
                 // Adjust vertical spacing to center graph vertically
                 let canvasEffectiveHeight = Math.ceil(canvas.height / scale);
-                let verticalSpace = Math.max(15, Math.floor(($(window).height()
+                let verticalSpace = Math.max(15, Math.floor((getScreenHeight()
                     - 60 - canvasEffectiveHeight) / 2));
+                console.log(canvasEffectiveHeight)
+                console.log(verticalSpace)
 
                 // Adjust padding to create desired vertical spacing
                 $("#canvas-container").css("padding-top", Math.max(15,
@@ -743,14 +745,31 @@ function toggleInfo() {
     }
 }
 
+// Gets normally, unless Android in which case original measurement used.
+function getScreenHeight() {
+    if (isAndroid) {
+        return androidHeight;
+    }
+    else return $(window).height();
+}
+
+// For getting proper height on Android
+var androidHeight;
+var isAndroid;
+
 // Run when document first loads
 $(document).ready(function() {
     setup(); // Set up page
 
+    // Android keyboard screws up height measurements, so measure now
+    $("input").blur(); // Hide Android keyboard
+    androidHeight = $(window).height()
+    let ua = navigator.userAgent.toLowerCase();
+    isAndroid = ua.indexOf("android") > -1; // Check if Android
+
     // If screen too short, change height of info box
-    $("input").blur(); // Hide Android keyboard before measuring height
     if (window.innerHeight < 350) {
-        $("#extra").css("max-height", window.innerHeight / 2);
+        $("#extra").css("max-height", getScreenHeight() / 2);
     }
 
     // Detect click to graph group
