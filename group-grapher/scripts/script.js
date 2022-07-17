@@ -770,6 +770,13 @@ $(document).ready(function() {
         $("#extra").css("max-height", getScreenHeight() / 2);
     }
 
+    // Zoom out to show 
+    const viewport = document.querySelector('meta[name="viewport"]');
+    if (viewport) {
+        viewport.content = 'initial-scale=1';
+        viewport.content = 'width=device-width';
+    }
+
     // Detect click to graph group
     $("#submit-group").click(function() {
         updatePage("group");
