@@ -367,8 +367,6 @@ function getUserInputStrings() {
 
 // Updates page to show a new graphs
 function updatePage(mode) {
-    // Hides Android keybaord, so proper height will be computed later
-    $("input").blur();
     let userInputStrings = getUserInputStrings(); // Get user's input
 
     if (userInputStrings != null) {
