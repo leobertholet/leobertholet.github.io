@@ -768,12 +768,6 @@ $(document).ready(function() {
         $("#extra").css("max-height", getScreenHeight() / 2);
     }
 
-    // On mobile where width is small, zoom out by changing viewport
-    const viewport = document.querySelector('meta[name="viewport"]');
-    if (viewport && $(window).width() < 480) {
-        viewport.content = 'width=480';
-    }
-
     // Detect click to graph group
     $("#submit-group").click(function() {
         updatePage("group");
