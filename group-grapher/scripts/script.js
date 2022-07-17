@@ -768,9 +768,8 @@ $(document).ready(function() {
         $("#extra").css("max-height", getScreenHeight() / 2);
     }
 
-    // Zoom out to show everything on mobile
+    // On mobile where width is small, zoom out by changing viewport
     const viewport = document.querySelector('meta[name="viewport"]');
-    alert(viewport && $(window).width() < 480)
     if (viewport && $(window).width() < 480) {
         viewport.content = 'width=480';
     }
