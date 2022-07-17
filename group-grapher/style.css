@@ -231,7 +231,7 @@ body {
     margin: 0;
 }
 
-#extra p.spacer, input.spacer, select.spacer {
+#extra .spacer {
     margin-right: 10px;
 }
 
