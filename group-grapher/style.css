@@ -226,9 +226,13 @@ body {
     overflow-y: scroll;
 }
 
-#extra p, input, select, .spacer {
+#extra p, input, select {
     display: inline-block;
     margin: 0;
+}
+
+#extra p.spacer, input.spacer, select.spacer {
+    margin-right: 10px;
 }
 
 #extra input, select {
@@ -256,8 +260,4 @@ body {
 
 #extra input {
     width: 25px;
-}
-
-.spacer {
-    width: 10px;
 }

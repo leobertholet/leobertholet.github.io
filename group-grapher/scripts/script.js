@@ -746,8 +746,8 @@ $(document).ready(function() {
     setup(); // Set up page
 
     // If screen too short, change height of info box
-    if (window.screen.height < 350) {
-        $("#extra").css("max-height", window.screen.height / 2);
+    if (window.innerHeight < 350) {
+        $("#extra").css("max-height", window.innerHeight / 2);
     }
 
     // Detect click to graph group
