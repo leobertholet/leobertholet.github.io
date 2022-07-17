@@ -771,6 +771,7 @@ $(document).ready(function() {
     }
 
     // Zoom out to show 
+    alert("Ready")
     const viewport = document.querySelector('meta[name="viewport"]');
     if (viewport) {
         viewport.content = 'initial-scale=1';
