@@ -253,10 +253,11 @@ function drawExpressionGrid(mode) {
     return true; // Indicate success
 }
 
+var targetSize; // Target size of canvas
+
 /* Adjusts display parameters based on how many boxes are being displayed, as
  * well as the globally known number of groups. */
 function renormalize(numBoxes) {
-    let targetSize = 400; // Target size of grid
     let targetSpacingRatio = 5; // Ratio of box length to space length
     let targetExtraSpacingRatio = 5; // Ratio of box length to extra spacing
 
@@ -761,12 +762,27 @@ $(document).ready(function() {
     let ua = navigator.userAgent.toLowerCase();
     isAndroid = ua.indexOf("android") > -1; // Check if Android
 
-    setup(); // Set up page
+    // Change default widths if window width is small
+    if ($(window).width() < 480) {
+        targetSize = $(window).width() - 15;
+        $("#input-holder").css("width", targetSize); // Change search bar size
+        targetSize = targetSize - 50; // Change target graph size
+        // Shorter link names under search bar
+        $("#submit-group").text("As group");
+        $("#info-button").text("Info");
+        // Reduce space between links
+        $("#second-line p").css("margin-left", "14px");
+        $("#second-line p:first-of-type").css("margin-left",
+            Math.max(14, $(window).width() - 310));
+    }
+    else targetSize = 400;
 
     // If screen too short, change height of info box
     if (window.innerHeight < 350) {
         $("#extra").css("max-height", getScreenHeight() / 2);
     }
+
+    setup(); // Set up page
 
     // Detect click to graph group
     $("#submit-group").click(function() {
