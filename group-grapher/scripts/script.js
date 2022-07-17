@@ -757,13 +757,13 @@ var isAndroid;
 
 // Run when document first loads
 $(document).ready(function() {
-    setup(); // Set up page
-
     // Android keyboard screws up height measurements, so measure now
     $("input").blur(); // Hide Android keyboard
     androidHeight = $(window).height()
     let ua = navigator.userAgent.toLowerCase();
     isAndroid = ua.indexOf("android") > -1; // Check if Android
+    
+    setup(); // Set up page
 
     // If screen too short, change height of info box
     if (window.innerHeight < 350) {
