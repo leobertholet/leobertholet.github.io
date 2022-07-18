@@ -261,3 +261,12 @@ body {
 #extra input {
     width: 25px;
 }
+
+.input-link {
+    color: rgb(69, 118, 207);
+}
+
+.input-link:hover {
+    color: cornflowerblue;
+    cursor: pointer;
+}

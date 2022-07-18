@@ -871,6 +871,13 @@ $(document).ready(function() {
         updatePage("ring");
     });
 
+    // When clicked, takes link text and graphs that.
+    $(".input-link").click(function() {
+        let expression = $(this).text();
+        $("#expression-input").val(expression);
+        updatePage("ring");
+    });
+
     // Code for label to show values when graph is hovered over
     $(document).on("mousemove", function(event) {
         // Check if mouse is over canvas
