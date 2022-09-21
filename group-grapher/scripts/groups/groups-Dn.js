@@ -86,11 +86,10 @@ groupsDn.createGroup = function(data) {
             if (!Number.isInteger(constant)) {
                 return NaN;
             }
-
             if (constant >= 0) {
                 return groupsHelper.mod(constant, n);
             }
-            else return groupsHelper.mod(constant + 1, n) - n - 1;
+            else return -groupsHelper.mod(-constant - 1, n) - 1;
         },
 
         evaluateVector(components) {
@@ -120,6 +119,11 @@ groupsDn.createGroup = function(data) {
         evaluateNegative: function(value) {
             if (!Number.isInteger(value)) {
                 return NaN;
+            }
+            /* In case expression was negative with multiple of n, which gets
+             * converted to 0. */
+            if (value == 0) {
+                return -n;
             }
 
             return this.evaluateConstant(-value);
