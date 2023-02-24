@@ -140,7 +140,7 @@ function drawExpressionGrid(mode) {
                 + extraSpacingParam; // Start of top row edge
 
             // Product colors can be mixed or displayed separately.
-            if (!mixProductsParam) {
+            if (!mixProductsParam || numGroups == 1) {
                 // Iterate through groups
                 for (let i = 0; i < numGroups; i++) {
                     let index = labelRow[rowColNum][i][1]; // Index in group
@@ -273,8 +273,8 @@ function renormalize(numBoxes) {
     $("#y-spacing").val(0);
     $("#extra-spacing").val(Math.ceil(boxSize / targetExtraSpacingRatio));
 
-    // If multiple blocks in each box
-    if (numGroups > 1) {
+    // If multiple blocks in each box, and not mixing products
+    if (numGroups > 1 && $("#mix-products>option:eq(0)").prop("selected")) {
         let spacingSize = Math.ceil(boxSize / targetSpacingRatio);
         $("#x-spacing").val(spacingSize);
         $("#y-spacing").val(spacingSize);
@@ -424,13 +424,8 @@ function setup() {
     $("#x-spacing").val("0");
     $("#y-spacing").val("0");
     $("#extra-spacing").val("10");
-    $("#h-lower").val("0");
-    $("#h-upper").val("360");
-    $("#s-lower").val("90");
-    $("#s-upper").val("90");
-    $("#l-lower").val("60");
-    $("#l-upper").val("60");
-    $("#mix-products>option:eq(0)").prop("selected", true);
+    setRainbow();
+    setSeparateProducts();
 
     updatePage("ring"); // Finally, update page
 }
@@ -681,6 +676,9 @@ function toggleSettings() {
         settingsDisplayed = true;
         infoDisplayed = false;
 
+        $("#settings-button").css("color", "gray");
+        $("#info-button").css("color", "black");
+
         let topOriginalHeight = $("#top").height();
         $("#extra").css("display", "block");
         $("#settings").css("display", "block");
@@ -695,6 +693,8 @@ function toggleSettings() {
     // Close settings if they are open
     else {
         settingsDisplayed = false;
+
+        $("#settings-button").css("color", "black");
 
         let topNewHeight = $("#top").height();
         $("#extra").css("display", "none");
@@ -715,6 +715,9 @@ function toggleInfo() {
         infoDisplayed = true;
         settingsDisplayed = false;
 
+        $("#info-button").css("color", "gray");
+        $("#settings-button").css("color", "black");
+
         let topOriginalHeight = $("#top").height();
         $("#extra").css("display", "block");
         $("#settings").css("display", "none");
@@ -729,6 +732,8 @@ function toggleInfo() {
     // Close info if it is open
     else {
         infoDisplayed = false;
+
+        $("#info-button").css("color", "black");
 
         let topNewHeight = $("#top").height();
         $("#extra").css("display", "none");
@@ -749,6 +754,57 @@ function getScreenHeight() {
     }
     else return $(window).height();
 }
+
+// Set rainbow scheme params
+function setRainbow() {
+    $("#h-lower").val("0");
+    $("#h-upper").val("360");
+    $("#s-lower").val("90");
+    $("#s-upper").val("90");
+    $("#l-lower").val("60");
+    $("#l-upper").val("60");
+}
+
+// Set blue scheme params
+function setBlue() {
+    $("#h-lower").val("200");
+    $("#h-upper").val("250");
+    $("#s-lower").val("90");
+    $("#s-upper").val("100");
+    $("#l-lower").val("65");
+    $("#l-upper").val("40");
+}
+
+// Set green scheme params
+function setGreen() {
+    $("#h-lower").val("150");
+    $("#h-upper").val("185");
+    $("#s-lower").val("85");
+    $("#s-upper").val("100");
+    $("#l-lower").val("65");
+    $("#l-upper").val("20");
+}
+    
+// Detect grayscale color scheme click
+function setGrayscale() {
+    $("#h-lower").val("0");
+    $("#h-upper").val("0");
+    $("#s-lower").val("0");
+    $("#s-upper").val("0");
+    $("#l-lower").val("100");
+    $("#l-upper").val("0");
+}
+
+// Sets product mixing param
+function setMixProducts() {
+    $("#mix-products>option:eq(1)").prop("selected", true);
+}
+
+// Sets product separation param
+function setSeparateProducts() {
+    $("#mix-products>option:eq(0)").prop("selected", true);
+}
+
 
 // For getting proper height on Android
 var androidHeight;
@@ -825,49 +881,25 @@ $(document).ready(function() {
 
     // Detect rainbow color scheme click
     $("#rainbow-scheme").click(function() {
-        $("#h-lower").val("0");
-        $("#h-upper").val("360");
-        $("#s-lower").val("90");
-        $("#s-upper").val("90");
-        $("#l-lower").val("60");
-        $("#l-upper").val("60");
-
+        setRainbow();
         updatePage("ring");
     });
 
     // Detect blue color scheme click
     $("#blue-scheme").click(function() {
-        $("#h-lower").val("200");
-        $("#h-upper").val("250");
-        $("#s-lower").val("90");
-        $("#s-upper").val("100");
-        $("#l-lower").val("65");
-        $("#l-upper").val("40");
-
+        setBlue();
         updatePage("ring");
     });
 
     // Detect green color scheme click
     $("#green-scheme").click(function() {
-        $("#h-lower").val("150");
-        $("#h-upper").val("185");
-        $("#s-lower").val("85");
-        $("#s-upper").val("100");
-        $("#l-lower").val("65");
-        $("#l-upper").val("20");
-
+        setGreen();
         updatePage("ring");
     });
     
     // Detect grayscale color scheme click
     $("#grayscale-scheme").click(function() {
-        $("#h-lower").val("0");
-        $("#h-upper").val("0");
-        $("#s-lower").val("0");
-        $("#s-upper").val("0");
-        $("#l-lower").val("100");
-        $("#l-upper").val("0");
-
+        setGrayscale();
         updatePage("ring");
     });
 
@@ -875,6 +907,27 @@ $(document).ready(function() {
     $(".input-link").click(function() {
         let expression = $(this).text();
         $("#expression-input").val(expression);
+        
+        // Update graphing params as necessary
+        if ($(this).hasClass("rainbow")) {
+            setRainbow();
+        }
+        if ($(this).hasClass("blue")) {
+            setBlue();
+        }
+        if ($(this).hasClass("green")) {
+            setGreen();
+        }
+        if ($(this).hasClass("grayscale")) {
+            setGrayscale();
+        }
+        if ($(this).hasClass("mix-products")) {
+            setMixProducts();
+        }
+        if ($(this).hasClass("separate-products")) {
+            setSeparateProducts();
+        }
+
         updatePage("ring");
     });
 

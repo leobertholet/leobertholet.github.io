@@ -264,6 +264,7 @@ body {
 
 .input-link {
     color: rgb(69, 118, 207);
+    text-decoration: none;
 }
 
 .input-link:hover {

@@ -134,24 +134,40 @@
                             <p class="bold spacer">Groups</p>
                             <p>Enter "[expression] in [group]" to graph an expression in one of the following groups.</p>
                             
-                            <br><p class="spacer">\(\mathbb{Z}_n\) ("Zn"), the ring of integers mod \(n\).</p>
-                            <p class="spacer">\(U(n)\) ("Un"), the corresponding group of units.</p>
-                            <p>For example, "<span class="input-link">(x - 32)^2 + (y - 32)^2 in Z128</span>".</p>
+                            <br><p class="spacer">&bull;&nbsp;&nbsp;
+                                \(\mathbb{Z}_n\) ("Zn"), the ring of integers mod \(n\).</p>
+                            <p class="spacer">For example, "<span class="input-link blue">(x - 32)^2 + (y - 32)^2 in Z128</span>"</p>
+                            <p class="spacer"> or </p>
+                            <p>"<span class="input-link rainbow">x^2 - 51xy + y^2 in Z100</span>".</p>
+                            
+                            <br><p class="spacer">&bull;&nbsp;&nbsp;
+                                \(U(n)\) ("Un"), the corresponding group of units.</p>
+                            <p>For example, "<span class="input-link rainbow">xy in U90</span>".</p>
 
-                            <br><p class="spacer">\(\mathcal{B}\) ("B"), the Boolean algebra with "0" as false, "1" as true.</p>
-                            <p>Booleans can be combined with "+" and "*" for OR and AND, respectively, and with "'" or "-" for NOT.</p>
+                            <br><p class="spacer">&bull;&nbsp;&nbsp;
+                                \(\mathcal{B}\) ("B"), the Boolean algebra with "0" as false and "1" as true.</p>
+                            <p class="spacer">Booleans can be combined with "+" and "*" for OR and AND, respectively, and with "'" or "-" for NOT.</p>
+                            <p class="spacer">For example, "<span class="input-link rainbow">x + y in B</span>" produces a truth table for OR.</p>
+                            <p>"<span class="input-link rainbow mix-products">xy in B x B x B x B x B</span>" produces a fractal.</p>
                             
-                            <br><p class="spacer">\(D_n\) ("Dn"), the group of symmetries of a regular \(n\)-gon in the plane.</p>
-                            <p>Here a nonnegative number "m" represents a counterclockwise rotation by m, while a negative number "-m" represents "(m - 1)H", a horizontal flip followed by a counterclockwise rotation by m - 1.</p>
+                            <br><p class="spacer">&bull;&nbsp;&nbsp;
+                                \(D_n\) ("Dn"), the group of symmetries of a regular \(n\)-gon in the plane.</p>
+                            <p class="spacer">Here a nonnegative number "m" represents a counterclockwise rotation by m, while a negative number "-m" represents "(m - 1)H", a horizontal flip followed by a counterclockwise rotation by m - 1.</p>
+                            <p>For example, "<span class="input-link rainbow">xy in D80</span>".</p>
                             
-                            <br><p class="spacer">\(\mathbb{F}_p[t]/(q), q(t) = c_0 + c_1 t + \cdots + c_nt^n\) ("Fp[c0, c1, ..., cn]"), the finite field of prime-power order \(p^n\) where \(q\) is irreducible over \(\mathbb{Z}_p\).</p>
-                            <p>Polynomials can be entered as bracketed vectors, e.g., "<span class="input-link">xy + [1,1] in F3[1,0,1]</span>" graphs \(xy + i + 1\) mod 3.</p>
+                            <br><p class="spacer">&bull;&nbsp;&nbsp;
+                                \(\mathbb{F}_p[t]/(q), q(t) = c_0 + c_1 t + \cdots + c_nt^n\) ("Fp[c0, c1, ..., cn]"), the finite field of prime-power order \(p^n\) where \(q\) is irreducible over \(\mathbb{Z}_p\).</p>
+                            <p class="spacer">Polynomials can be entered as bracketed vectors, e.g., "<span class="input-link rainbow">xy + [1,1] in F3[1,0,1]</span>" graphs \(xy + i + 1\) mod 3.</p>
+                            <p class="spacer">Other examples: "<span class="input-link rainbow">x + y in F7[1,1,1]</span>"</p>
+                            <p class="spacer"> and </p>
+                            <p>"<span class="input-link rainbow">xy in F5[3,3,0,1]</span>".</p>
                         </div>
 
                         <!-- Information about external direct products -->
                         <div class="line">
                             <p class="bold spacer">External direct products</p>
-                            <p>To graph a Cartesian product, separate group names with "x", e.g., "<span class="input-link">xy in Z2 x Z4 x U5</span>".</p>
+                            <p class="spacer">To graph a Cartesian product, separate group names with "x", e.g., "<span class="input-link rainbow separate-products">xy in Z2 x Z4 x U5</span>".</p>
+                            <p>Product colors can be mixed: "<span class="input-link rainbow mix-products">xy in Z4 x U4</span>".</p>
                         </div>
 
                         <!-- Information about available operations -->
@@ -159,7 +175,7 @@
                             <p class="bold spacer">Operations</p>
                             <p class="spacer">"+", "-", "*", "/" denote the usual operations, based on the algebraic setting.</p>
                             <p class="spacer">Use "^" for exponents.</p>
-                            <p>Use "'" for the inverse of a group operation, e.g., "<span class="input-link">xy' in U5</span>" graphs \(xy^{-1}\) in \(U(5)\).</p>
+                            <p>Use "'" for the inverse of a group operation, e.g., "<span class="input-link rainbow">xy' in U5</span>" graphs \(xy^{-1}\) in \(U(5)\).</p>
                         </div>
 
                         <!-- Information about equality checks -->
@@ -167,7 +183,8 @@
                             <p class="bold spacer">Equality checks</p>
                             <p class="spacer">Using "=" to check for equality returns a Boolean.</p>
                             <p class="spacer">Boolean clauses can be combined with the Boolean operations explained above.</p>
-                            <p>For example, "<span class="input-link">y^2 = x^3 + x in Z23</span>" graphs the solutions of \(y^2=x^3+x\) in the field \(\mathbb{Z}_{23}\).</p>
+                            <p class="spacer">For example, "<span class="input-link rainbow">y^2 = x^3 + x in Z23</span>" graphs the solutions of \(y^2=x^3+x\) in the field \(\mathbb{Z}_{23}\).</p>
+                            <p>"<span class="input-link rainbow">(x = y^3)(y = x^3) in Z10</span>" plots \(x, y\) which are cubes of each other in \(\mathbb{Z}_{10}\).</p>
                         </div>
 
                         <!-- Information about saving graph image -->
