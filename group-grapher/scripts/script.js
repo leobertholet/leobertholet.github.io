@@ -676,7 +676,7 @@ function toggleSettings() {
         settingsDisplayed = true;
         infoDisplayed = false;
 
-        $("#settings-button").css("color", "gray");
+        $("#settings-button").css("color", "slategray");
         $("#info-button").css("color", "black");
 
         let topOriginalHeight = $("#top").height();
@@ -715,7 +715,7 @@ function toggleInfo() {
         infoDisplayed = true;
         settingsDisplayed = false;
 
-        $("#info-button").css("color", "gray");
+        $("#info-button").css("color", "slategray");
         $("#settings-button").css("color", "black");
 
         let topOriginalHeight = $("#top").height();
